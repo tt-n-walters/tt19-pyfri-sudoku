@@ -48,7 +48,14 @@ def solve(puzzle):
                     # If the heuristic looks true
                     if check_pos(puzzle, x, y, n):
                         puzzle[y][x] = n
+                        print_puzzle(puzzle)
                         solve(puzzle)
+                        # Forget the heuristic
+                        puzzle[y][x] = 0
+
+                # Dead-end. Start backtracking
+                return None
+    return
 
 
 # heuristics
@@ -59,4 +66,5 @@ puzzles = read_puzzle_file()
 puzzle = convert_puzzle(puzzles[18])
 
 print_puzzle(puzzle)
+solve(puzzle)
 

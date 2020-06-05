@@ -36,7 +36,21 @@ def check_pos(puzzle, x, y, n):
     section = [n for row in puzzle[j : j+3] for n in row[i : i+3]]
     
     return not n in row and not n in column and not n in section
-    
+
+
+def solve(puzzle):
+    for y in range(len(puzzle)):
+        for x in range(len(puzzle[y])):
+            number = puzzle[y][x]
+            if number == 0:
+                for n in range(1, 10):
+                    # If the number fits
+                    # If the heuristic looks true
+                    if check_pos(puzzle, x, y, n):
+                        puzzle[y][x] = n
+                        solve(puzzle)
+
+
 # heuristics
 # backtracking
 
@@ -45,3 +59,4 @@ puzzles = read_puzzle_file()
 puzzle = convert_puzzle(puzzles[18])
 
 print_puzzle(puzzle)
+
